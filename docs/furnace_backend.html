@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module furnace_backend</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>furnace_backend</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/micah/mbushou%40ncsu.edu/P_furnace_backend/furnace_backend.py">/home/micah/mbushou@ncsu.edu/P_furnace_backend/furnace_backend.py</a></font></td></tr></table>
+    <p><tt>Main&nbsp;Furnace&nbsp;backend&nbsp;library.&nbsp;&nbsp;Exposes&nbsp;API&nbsp;to&nbsp;tenant&nbsp;code.&nbsp;Formats&nbsp;and&nbsp;sends&nbsp;IPC.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="google.protobuf.internal.api_implementation.html">google.protobuf.internal.api_implementation</a><br>
+<a href="collections.html">collections</a><br>
+<a href="facilities_pb2.html">facilities_pb2</a><br>
+</td><td width="25%" valign=top><a href="furnace_runtime.html">furnace_runtime</a><br>
+<a href="logging.html">logging</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="re.html">re</a><br>
+<a href="sys.html">sys</a><br>
+<a href="time.html">time</a><br>
+</td><td width="25%" valign=top><a href="uuid.html">uuid</a><br>
+<a href="zmq.html">zmq</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="furnace_runtime.html#FurnaceRuntime">furnace_runtime.FurnaceRuntime</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="furnace_backend.html#BE">BE</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BE">class <strong>BE</strong></a>(<a href="furnace_runtime.html#FurnaceRuntime">furnace_runtime.FurnaceRuntime</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Main&nbsp;Furnace&nbsp;backend&nbsp;class.&nbsp;&nbsp;Actions&nbsp;all&nbsp;API&nbsp;calls.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="furnace_backend.html#BE">BE</a></dd>
+<dd><a href="furnace_runtime.html#FurnaceRuntime">furnace_runtime.FurnaceRuntime</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BE-__init__"><strong>__init__</strong></a>(self, kp, debug=False, be_ip='127.0.0.1', be_base_port=5561)</dt><dd><tt>Constructor,&nbsp;ZMQ&nbsp;connects&nbsp;are&nbsp;built&nbsp;here.<br>
+:param&nbsp;kp:&nbsp;The&nbsp;keypair&nbsp;to&nbsp;use,&nbsp;in&nbsp;the&nbsp;form&nbsp;{'be_key':&nbsp;'[path]',&nbsp;'app_key':&nbsp;'[path]'}</tt></dd></dl>
+
+<dl><dt><a name="BE-broadcast"><strong>broadcast</strong></a>(self, msg)</dt><dd><tt>Supported&nbsp;API&nbsp;call.<br>
+Send&nbsp;an&nbsp;async&nbsp;message&nbsp;to&nbsp;all&nbsp;registered&nbsp;tenant&nbsp;apps.&nbsp;&nbsp;Uses&nbsp;the&nbsp;ZMQ&nbsp;publisher&nbsp;channel.&nbsp;&nbsp;Immediately&nbsp;returns&nbsp;regardless&nbsp;of&nbsp;delivery.<br>
+:param&nbsp;msg:&nbsp;String&nbsp;to&nbsp;send.<br>
+:returns:&nbsp;Nothing.</tt></dd></dl>
+
+<dl><dt><a name="BE-check_encoding"><strong>check_encoding</strong></a>(self, val)</dt><dd><tt>Internal&nbsp;use&nbsp;only.<br>
+Fun.&nbsp;&nbsp;Now&nbsp;with&nbsp;more&nbsp;Unicode.<br>
+:param&nbsp;val:&nbsp;Is&nbsp;this&nbsp;variable&nbsp;a&nbsp;string?<br>
+:returns:&nbsp;Nothing.<br>
+:raises:&nbsp;TypeError&nbsp;if&nbsp;val&nbsp;is&nbsp;not&nbsp;a&nbsp;string.</tt></dd></dl>
+
+<dl><dt><a name="BE-event_clear"><strong>event_clear</strong></a>(self, unsafe_tid)</dt><dd><tt>Supported&nbsp;API&nbsp;call.<br>
+Clear&nbsp;a&nbsp;callback&nbsp;for&nbsp;a&nbsp;certain&nbsp;event.<br>
+:param&nbsp;tid:&nbsp;Event&nbsp;ID,&nbsp;returned&nbsp;from&nbsp;event_register.<br>
+:returns:&nbsp;Nothing.<br>
+:raises:&nbsp;Exception&nbsp;for&nbsp;an&nbsp;unknown&nbsp;timer.<br>
+:raises:&nbsp;Exception&nbsp;if&nbsp;the&nbsp;caller&nbsp;attempts&nbsp;to&nbsp;clear&nbsp;the&nbsp;FE&nbsp;callback.</tt></dd></dl>
+
+<dl><dt><a name="BE-event_register"><strong>event_register</strong></a>(self, edata)</dt><dd><tt>Supported&nbsp;API&nbsp;call.<br>
+Register&nbsp;a&nbsp;callback&nbsp;for&nbsp;a&nbsp;certain&nbsp;event.<br>
+:param&nbsp;edata:&nbsp;A&nbsp;dict&nbsp;containing&nbsp;registration&nbsp;info,&nbsp;including&nbsp;the&nbsp;following&nbsp;key:value&nbsp;pairs.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'event_type':&nbsp;Event&nbsp;type&nbsp;constant,&nbsp;see&nbsp;constants.py.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'callback':&nbsp;Tenant&nbsp;function&nbsp;pointer&nbsp;to&nbsp;call&nbsp;when&nbsp;matching&nbsp;event&nbsp;arrives.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;event_type&nbsp;==&nbsp;TIMER,&nbsp;also&nbsp;include&nbsp;these&nbsp;key:value&nbsp;pairs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'time_value':&nbsp;(float)&nbsp;call&nbsp;this&nbsp;callback&nbsp;every&nbsp;X&nbsp;seconds.<br>
+:returns:&nbsp;event&nbsp;ID.&nbsp;&nbsp;Can&nbsp;be&nbsp;later&nbsp;used&nbsp;to&nbsp;clear&nbsp;this&nbsp;event.<br>
+:raises:&nbsp;Exception&nbsp;for&nbsp;unknown&nbsp;event&nbsp;type.<br>
+:raises:&nbsp;Generic&nbsp;catchall&nbsp;failure&nbsp;(this&nbsp;should&nbsp;never&nbsp;occur).</tt></dd></dl>
+
+<dl><dt><a name="BE-exit"><strong>exit</strong></a>(self)</dt><dd><tt>Supported&nbsp;API&nbsp;call.<br>
+Exit&nbsp;without&nbsp;tearing&nbsp;down.<br>
+:returns:&nbsp;Nothing.</tt></dd></dl>
+
+<dl><dt><a name="BE-get_status"><strong>get_status</strong></a>(self, msgtype)</dt><dd><tt>Internal&nbsp;use&nbsp;only.<br>
+Helper&nbsp;function&nbsp;to&nbsp;retrieve&nbsp;the&nbsp;status&nbsp;of&nbsp;an&nbsp;inbound&nbsp;protobuf.<br>
+:param&nbsp;msgtype:&nbsp;String&nbsp;matching&nbsp;the&nbsp;name&nbsp;of&nbsp;a&nbsp;field&nbsp;(see&nbsp;.proto&nbsp;for&nbsp;valid&nbsp;field&nbsp;names).<br>
+:param&nbsp;index:&nbsp;Which&nbsp;index&nbsp;(for&nbsp;repeated&nbsp;fields)?<br>
+:returns:&nbsp;status</tt></dd></dl>
+
+<dl><dt><a name="BE-get_status_result"><strong>get_status_result</strong></a>(self, msgtype)</dt><dd><tt>Internal&nbsp;use&nbsp;only.<br>
+Helper&nbsp;function&nbsp;to&nbsp;retrieve&nbsp;the&nbsp;result&nbsp;and&nbsp;status&nbsp;of&nbsp;an&nbsp;inbound&nbsp;protobuf.<br>
+:param&nbsp;msgtype:&nbsp;String&nbsp;matching&nbsp;the&nbsp;name&nbsp;of&nbsp;a&nbsp;field&nbsp;(see&nbsp;.proto&nbsp;for&nbsp;valid&nbsp;field&nbsp;names).<br>
+:returns:&nbsp;Tuple&nbsp;of&nbsp;(status,&nbsp;result).</tt></dd></dl>
+
+<dl><dt><a name="BE-log"><strong>log</strong></a>(self, data)</dt><dd><tt>Supported&nbsp;API&nbsp;call.<br>
+:param&nbsp;data:&nbsp;Write&nbsp;this&nbsp;data&nbsp;to&nbsp;the&nbsp;backend's&nbsp;logging&nbsp;mechanism.<br>
+:returns:&nbsp;Nothing.</tt></dd></dl>
+
+<dl><dt><a name="BE-loop"><strong>loop</strong></a>(self)</dt><dd><tt>Internal&nbsp;use&nbsp;only.<br>
+Main&nbsp;event&nbsp;loop.&nbsp;&nbsp;Polls&nbsp;(with&nbsp;timeout)&nbsp;on&nbsp;ZMQ&nbsp;sockets&nbsp;waiting&nbsp;for&nbsp;data&nbsp;from&nbsp;tenant&nbsp;apps.&nbsp;&nbsp;Calls&nbsp;tenant-registered&nbsp;callbacks.<br>
+:returns:&nbsp;Nothing.</tt></dd></dl>
+
+<dl><dt><a name="BE-mget_status"><strong>mget_status</strong></a>(self, msgtype, index)</dt><dd><tt>Internal&nbsp;use&nbsp;only.<br>
+Helper&nbsp;function&nbsp;to&nbsp;retrieve&nbsp;the&nbsp;status&nbsp;of&nbsp;an&nbsp;inbound&nbsp;protobuf.<br>
+:param&nbsp;msgtype:&nbsp;String&nbsp;matching&nbsp;the&nbsp;name&nbsp;of&nbsp;a&nbsp;field&nbsp;(see&nbsp;.proto&nbsp;for&nbsp;valid&nbsp;field&nbsp;names).<br>
+:param&nbsp;index:&nbsp;Which&nbsp;index&nbsp;(for&nbsp;repeated&nbsp;fields)?<br>
+:returns:&nbsp;status</tt></dd></dl>
+
+<dl><dt><a name="BE-mget_status_result"><strong>mget_status_result</strong></a>(self, msgtype, index)</dt><dd><tt>Internal&nbsp;use&nbsp;only.<br>
+Helper&nbsp;function&nbsp;to&nbsp;retrieve&nbsp;the&nbsp;result&nbsp;and&nbsp;status&nbsp;of&nbsp;an&nbsp;inbound&nbsp;protobuf.<br>
+:param&nbsp;msgtype:&nbsp;String&nbsp;matching&nbsp;the&nbsp;name&nbsp;of&nbsp;a&nbsp;field&nbsp;(see&nbsp;.proto&nbsp;for&nbsp;valid&nbsp;field&nbsp;names).<br>
+:param&nbsp;index:&nbsp;Which&nbsp;index&nbsp;(for&nbsp;repeated&nbsp;fields)?<br>
+:returns:&nbsp;Tuple&nbsp;of&nbsp;(status,&nbsp;result).</tt></dd></dl>
+
+<dl><dt><a name="BE-mmsg_helper"><strong>mmsg_helper</strong></a>(self, msgtype)</dt><dd><tt>Internal&nbsp;use&nbsp;only.<br>
+Helper&nbsp;function&nbsp;to&nbsp;add&nbsp;another&nbsp;repeated&nbsp;field&nbsp;to&nbsp;a&nbsp;protobuf.<br>
+:param&nbsp;msgtype:&nbsp;string&nbsp;matching&nbsp;the&nbsp;name&nbsp;of&nbsp;a&nbsp;field&nbsp;(see&nbsp;.proto&nbsp;for&nbsp;valid&nbsp;field&nbsp;names)<br>
+:returns:&nbsp;The&nbsp;submsg,&nbsp;ready&nbsp;to&nbsp;be&nbsp;populated.</tt></dd></dl>
+
+<dl><dt><a name="BE-module_register"><strong>module_register</strong></a>(self)</dt><dd><tt>Internal&nbsp;use&nbsp;only.<br>
+Glues&nbsp;together&nbsp;namespaces.<br>
+:returns:&nbsp;Nothing.</tt></dd></dl>
+
+<dl><dt><a name="BE-msg_helper"><strong>msg_helper</strong></a>(self, msgtype)</dt><dd><tt>Internal&nbsp;use&nbsp;only.<br>
+Helper&nbsp;function&nbsp;to&nbsp;add&nbsp;a&nbsp;single&nbsp;field&nbsp;to&nbsp;a&nbsp;protobuf.<br>
+:param&nbsp;msgtype:&nbsp;string&nbsp;matching&nbsp;the&nbsp;name&nbsp;of&nbsp;a&nbsp;field&nbsp;(see&nbsp;.proto&nbsp;for&nbsp;valid&nbsp;field&nbsp;names)<br>
+:returns:&nbsp;The&nbsp;submsg,&nbsp;ready&nbsp;to&nbsp;be&nbsp;populated.</tt></dd></dl>
+
+<dl><dt><a name="BE-notify"><strong>notify</strong></a>(self, feid, msg)</dt><dd><tt>Supported&nbsp;API&nbsp;call.<br>
+Send&nbsp;an&nbsp;async&nbsp;message&nbsp;to&nbsp;a&nbsp;single&nbsp;registered&nbsp;tenant&nbsp;app.&nbsp;&nbsp;Uses&nbsp;the&nbsp;ZMQ&nbsp;publisher&nbsp;channel.&nbsp;&nbsp;Immediately&nbsp;returns&nbsp;regardless&nbsp;of&nbsp;delivery.<br>
+:param&nbsp;feid:&nbsp;String&nbsp;matching&nbsp;desired&nbsp;app's&nbsp;ID.<br>
+:param&nbsp;msg:&nbsp;String&nbsp;to&nbsp;send.<br>
+:returns:&nbsp;Nothing.</tt></dd></dl>
+
+<dl><dt><a name="BE-post_app_init"><strong>post_app_init</strong></a>(self, app)</dt><dd><tt>Internal&nbsp;use&nbsp;only.<br>
+Called&nbsp;by&nbsp;bemain&nbsp;after&nbsp;the&nbsp;tenant&nbsp;backend's&nbsp;constructor&nbsp;runs.&nbsp;&nbsp;Checks&nbsp;to&nbsp;ensure&nbsp;the&nbsp;constructor&nbsp;registered&nbsp;exactly&nbsp;one&nbsp;FE&nbsp;callback.<br>
+:param&nbsp;app:&nbsp;The&nbsp;tenant's&nbsp;app&nbsp;instance.<br>
+:returns:&nbsp;Nothing.<br>
+:raises:&nbsp;Exception&nbsp;when&nbsp;caller&nbsp;attempts&nbsp;to&nbsp;register&nbsp;a&nbsp;2nd&nbsp;FE&nbsp;callback.<br>
+:raises:&nbsp;Exception&nbsp;when&nbsp;caller&nbsp;failed&nbsp;register&nbsp;any&nbsp;FE&nbsp;callback.</tt></dd></dl>
+
+<dl><dt><a name="BE-send_default_reply"><strong>send_default_reply</strong></a>(self)</dt><dd><tt>Internal&nbsp;use&nbsp;only.<br>
+Helper&nbsp;function&nbsp;to&nbsp;send&nbsp;a&nbsp;prepared&nbsp;protobuf&nbsp;(self.<strong>msg_out</strong>),&nbsp;then&nbsp;block&nbsp;until&nbsp;a&nbsp;response&nbsp;is&nbsp;returned.<br>
+:returns:&nbsp;Nothing.</tt></dd></dl>
+
+<dl><dt><a name="BE-set_name"><strong>set_name</strong></a>(self, name)</dt><dd><tt>Supported&nbsp;API&nbsp;call.<br>
+:param&nbsp;name:&nbsp;The&nbsp;backend's&nbsp;name&nbsp;(must&nbsp;be&nbsp;alphanum&nbsp;and&nbsp;&lt;=16&nbsp;characters).<br>
+:returns:&nbsp;Nothing.<br>
+:raises:&nbsp;Exception&nbsp;if&nbsp;malformed.</tt></dd></dl>
+
+<dl><dt><a name="BE-shutdown"><strong>shutdown</strong></a>(self)</dt><dd><tt>Supported&nbsp;API&nbsp;call.<br>
+Exit&nbsp;cleanly.<br>
+:returns:&nbsp;Nothing.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="furnace_runtime.html#FurnaceRuntime">furnace_runtime.FurnaceRuntime</a>:<br>
+<dl><dt><a name="BE-run"><strong>run</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BE-signal_handler"><strong>signal_handler</strong></a>(self, rcv_signal, frame)</dt></dl>
+
+<dl><dt><a name="BE-start_logs"><strong>start_logs</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BE-tprint"><strong>tprint</strong></a>(self, log_type, entry)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="furnace_runtime.html#FurnaceRuntime">furnace_runtime.FurnaceRuntime</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>ACTIVE</strong> = 20<br>
+<strong>ASYNC</strong> = 31<br>
+<strong>CR3</strong> = 1<br>
+<strong>CR4</strong> = 2<br>
+<strong>FE</strong> = 8<br>
+<strong>F_ADD</strong> = 1<br>
+<strong>F_OVERWRITE</strong> = 3<br>
+<strong>F_SUB</strong> = 2<br>
+<strong>INACTIVE</strong> = 21<br>
+<strong>INT</strong> = 4<br>
+<strong>KERNEL</strong> = 0<br>
+<strong>MAX_FIELD_SIZE</strong> = 11056943<br>
+<strong>MEM</strong> = 5<br>
+<strong>PUBSUB</strong> = 32<br>
+<strong>REG</strong> = 3<br>
+<strong>SYNC</strong> = 30<br>
+<strong>SYSCALL_PLUGIN</strong> = 9<br>
+<strong>TIMEOUT_BE</strong> = 250<br>
+<strong>TIMER</strong> = 6<br>
+<strong>VMI_FAILURE</strong> = 1<br>
+<strong>VMI_SUCCESS</strong> = 0<br>
+<strong>bei</strong> = None<br>
+<strong>broadcast</strong> = None<br>
+<strong>event_clear</strong> = None<br>
+<strong>event_register</strong> = None<br>
+<strong>exit</strong> = None<br>
+<strong>log</strong> = None<br>
+<strong>notify</strong> = None<br>
+<strong>set_name</strong> = None</td></tr></table>
+</body></html>
