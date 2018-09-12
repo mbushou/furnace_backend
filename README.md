@@ -1,7 +1,7 @@
 Furnace Backend
 =======
 
-<img align="right" width=20% src="https://github.ncsu.edu/mbushou/furnace/blob/master/misc/logo_smoke_sm.png">
+<img align="right" width=20% src="https://github.com/mbushou/furnace/blob/master/misc/logo_smoke_sm.png">
 
 Introduction
 -------
@@ -11,7 +11,7 @@ This is Furnace's tenant-side code.  It allows tenant VMI programmers to:
 
 Please see ./docs for the pydoc documentation.
 
-For more information on the Furnace project, visit its [main repository](https://github.ncsu.edu/mbushou/furnace).
+For more information on the Furnace project, visit its [main repository](https://github.com/mbushou/furnace).
 
 The installation instructions assume a Fedora 28 machine.
 
